@@ -2,7 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express')
 const cors = require('cors')
 
-const token = 'yourtoken';
+const token = '5679319822:AAEdpnGEsgaW1ofjFwbtj7h8NihRw9dn6RU';
 const webAppUrl = 'https://heroic-empanada-97d0d5.netlify.app'
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -36,7 +36,7 @@ bot.on('message', async (msg) => {
         const data = JSON.parse(msg?.web_app_data?.data)
 
         await bot.sendMessage(chatId,'Спасибо за обратную связь! ')
-        await bot.sendMessage(chatId,'Ваше ФИО: ' + data?.fio);
+        await bot.sendMessage(chatId,'Ваше ФИО: ' + data?.country);
         await bot.sendMessage(chatId,'Ваша улица: ' + data?.street);
 
         setTimeout(async () => {
