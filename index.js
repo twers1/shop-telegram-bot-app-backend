@@ -30,13 +30,17 @@ bot.on('message', async (msg) => {
         }
     })
   }
+  if(text === '/info'){
+    await bot.sendMessage(chatId, 'Если у вас остались вопросы, то вам сюда -> @feedbackArmenianHomeBot', {
+    })
+  }
 
   if(msg?.web_app_data?.data) {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
 
         await bot.sendMessage(chatId,'Спасибо за обратную связь! ')
-        await bot.sendMessage(chatId,'Ваше ФИО: ' + data?.country);
+        await bot.sendMessage(chatId,'Ваше ФИО: ' + data?.fio);
         await bot.sendMessage(chatId,'Ваша улица: ' + data?.street);
 
         setTimeout(async () => {
