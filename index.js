@@ -2,6 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express')
 const cors = require('cors')
 
+
 const token = '5679319822:AAEdpnGEsgaW1ofjFwbtj7h8NihRw9dn6RU';
 const webAppUrl = 'https://heroic-empanada-97d0d5.netlify.app'
 const drinks = 'https://symphonious-sherbet-5e11cb.netlify.app'
@@ -41,15 +42,28 @@ bot.on('message', async (msg) => {
 
   if(text === '/products'){
     await bot.sendMessage(chatId, 'Здесь представлен весь ассортимент продуктов', {
-        reply_markup: {
+        reply_markup:  {
             inline_keyboard:[
-                [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}}]
+                [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}},
+                {text: 'Овощная консервация',  web_app:{}},
+                {text: 'Сыры',  web_app:{}},
+                {text: 'Колбаса / Бастурма / Суджух',  web_app:{}},
+                {text: 'Замороженные продукты',  web_app:{}},
+                {text: 'Чаи / Кофе',  web_app:{}},
+                {text: 'Конфеты',  web_app:{}},
+                {text: 'Мороженое',  web_app:{}},
+                {text: 'Аксессуары',  web_app:{}},
+                {text: 'Сухофрукты',  web_app:{}},
+
+
+            ]
             ]
         }
     })
     await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь', {
     })
   }
+
 
   if(msg?.web_app_data?.data) {
     try {
@@ -69,7 +83,10 @@ bot.on('message', async (msg) => {
     }
     
   }
+
 });
+
+
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = [], totalPrice} = req.body;
