@@ -44,26 +44,46 @@ bot.on('message', async (msg) => {
         reply_markup:  {
             inline_keyboard:[
                 [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}},
-                {text: 'Овощная консервация',  web_app:{}},
-                {text: 'Сыры',  web_app:{}},
-                {text: 'Колбаса / Бастурма / Суджух',  web_app:{}},
-                {text: 'Замороженные продукты',  web_app:{}},
-                {text: 'Чаи / Кофе',  web_app:{}},
-                {text: 'Конфеты',  web_app:{}},
-                {text: 'Мороженое',  web_app:{}},
-                {text: 'Аксессуары',  web_app:{}},
-                {text: 'Сухофрукты',  web_app:{}},
-
-
+                {text: 'Овощная консервация',  web_app:{url: drinks}},]
             ]
+        }
+    })
+    await bot.sendMessage(chatId, 'Сыры и бастурма', {
+        reply_markup:  {
+            inline_keyboard:[
+                [{text: 'Сыры',  web_app:{url: drinks}},
+                {text: 'Колбаса / Бастурма / Суджух', web_app:{url: drinks}},]
+            ]
+        }
+    })
+    await bot.sendMessage(chatId, 'Замороженные продукты и мороженое', {
+        reply_markup:  {
+            inline_keyboard:[
+                [{text: 'Замороженные продукты',  web_app:{url: drinks}},
+                {text: 'Мороженое',  web_app:{url: drinks}},]
+            ]
+        }
+    })
+    await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
+        reply_markup:  {
+            inline_keyboard:[
+                [{text: 'Чаи / Кофе',  web_app:{url: drinks}},
+                {text: 'Конфеты',  web_app:{url: drinks}}]
+            ]
+        }
+    })
+    await bot.sendMessage(chatId, 'Сухофрукты и аксессуары', {
+        reply_markup:  {
+            inline_keyboard:[
+                [{text: 'Аксессуары', web_app:{url: drinks}},
+                {text: 'Сухофрукты',  web_app:{url: drinks}}]
             ]
         }
     })
     await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь', {
     })
   }
-
-
+  
   if(msg?.web_app_data?.data) {
     try {
         const data = JSON.parse(msg?.web_app_data?.data)
