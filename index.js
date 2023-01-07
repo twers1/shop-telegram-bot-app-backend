@@ -5,6 +5,7 @@ const cors = require('cors')
 const token = 'yourTOKEN';
 const webAppUrl = 'https://heroic-empanada-97d0d5.netlify.app'
 const drinks = 'https://symphonious-sherbet-5e11cb.netlify.app'
+const cannedVeg = 'https://incredible-souffle-19427e.netlify.app'
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
@@ -44,7 +45,7 @@ bot.on('message', async (msg) => {
         reply_markup:  {
             inline_keyboard:[
                 [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}},
-                {text: 'Овощная консервация',  web_app:{url: drinks}},]
+                {text: 'Овощная консервация',  web_app:{url: cannedVeg}},]
             ]
         }
     })
