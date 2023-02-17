@@ -81,6 +81,14 @@ bot.on('message', async (msg) => {
             ]
         }
     })
+    await bot.sendMessage(chatId, 'Джемы и варенья', {
+        reply_markup:  {
+            inline_keyboard:[
+                [{text: 'Джемы / Варенья', web_app:{url: drinks}},
+                {text: '.',  web_app:{url: drinks}}]
+            ]
+        }
+    })
     await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь', {
     })
   }
