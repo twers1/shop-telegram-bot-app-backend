@@ -1,9 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express')
 const cors = require('cors')
+require('dotenv').config();
 
 
-const token = 'yourTOKEN';
+const token = process.env.BOT_TOKEN;
 const webAppUrl = 'https://heroic-empanada-97d0d5.netlify.app'
 const drinks = 'https://symphonious-sherbet-5e11cb.netlify.app'
 const cannedVeg = 'https://incredible-souffle-19427e.netlify.app'
@@ -18,7 +19,7 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if(text === '/start'){
-    await bot.sendMessage(chatId, 'Добро пожаловать в наш уютный виртуальный магазин!\nТут вы сможете посмотреть все продукты, не выходя из дома\nЗадать интересующиеся вопросы в обратной связи\nТакже заполнить форму, чтобы оформить вам доставку на дом!')
+    await bot.sendMessage(chatId, '🏠Добро пожаловать в наш уютный виртуальный магазин!\n🍏Тут вы сможете посмотреть все продукты, не выходя из дома\n✔️Задать интересующиеся вопросы в обратной связи\n🚚Также заполнить форму, чтобы оформить вам доставку на дом!')
     
     await bot.sendMessage(chatId, 'Тут находятся все продукты из нашей базы данных: ', {
         reply_markup: {
@@ -74,36 +75,24 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Чаи / Кофе',  web_app:{url: drinks}},
-                    {text: 'Конфеты',  web_app:{url: drinks}}]
+                    [{text: 'Чай / Кофе / Конфеты',  web_app:{url: drinks}},
+                    {text: 'Сухофрукты',  web_app:{url: drinks}}]
                 ]
             }
         })
     }, 4000)
 
     setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Сухофрукты и аксессуары', {
+        await bot.sendMessage(chatId, 'Джемы, варенья и акксессуары', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Аксессуары', web_app:{url: drinks}},
-                    {text: 'Сухофрукты',  web_app:{url: drinks}}]
+                    [{text: 'Джемы / Варенья', web_app:{url: drinks}},
+                    {text: 'Акксессуары',  web_app:{url: drinks}}]
                 ]
             }
         })
     },5000)
     
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Джемы и варенья', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Джемы / Варенья', web_app:{url: drinks}},
-                    {text: '.',  web_app:{url: drinks}}]
-                ]
-            }
-        })
-    }, 6000)
-    
-
     setTimeout(async () => {
         await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь. Для этого заполни форму: ', {
             reply_markup: {
@@ -117,7 +106,11 @@ bot.on('message', async (msg) => {
   }
 
   if(text === "/commands"){
-    await bot.sendMessage(chatId, 'Команды: \n /start - запустить бота\n /info - получить информацию об обратной связи\n /products - получить все продукты')
+    await bot.sendMessage(chatId, 'Команды: \n /start - запустить бота\n /info - получить информацию об обратной связи\n /products - получить все продукты\n /socials - наши контакты')
+  }
+
+  if(text ==="/socials"){
+    await bot.sendMessage(chatId, '🌐Наши социальные сети:\n Вконтакте: https://vk.com/armenianhomenn \n Инстаграм: https://instagram.com/armenianhome?igshid=NTc4MTIwNjQ2YQ== \n 🗺️Мы в картах: \n Яндекс: https://yandex.ru/maps/org/armyanskiy_dom/98158241338/?ll=43.865124%2C56.345758&z=13 \n Гугл: https://www.google.com/maps/place/Армянский+Дом/@56.3458083,43.8653642,15z/data=!4m6!3m5!1s0x4151d7b1379f5eab:0x5bbe873a011b4cb7!8m2!3d56.3458083!4d43.8653642!16s%2Fg%2F11s7vn1tyn?hl=ru')
   }
   
   if(msg?.web_app_data?.data) {
