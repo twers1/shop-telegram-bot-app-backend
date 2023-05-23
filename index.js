@@ -2,6 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express')
 const cors = require('cors')
 require('dotenv').config();
+const { Keyboard } = require('telegram-keyboard')
 
 
 const token = process.env.BOT_TOKEN;
@@ -10,6 +11,7 @@ const drinks = 'https://symphonious-sherbet-5e11cb.netlify.app'
 const cannedVeg = 'https://incredible-souffle-19427e.netlify.app'
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
+const keyboard = Keyboard.inline(['Напитки / Компоты / Вода', 'Овощная консервация', 'Сыры', 'Колбаса / Бастурма / Суджух', 'Замороженные продукты', 'Мороженое', 'Чай / Кофе / Конфеты', 'Сухофрукты' ])
 
 app.use(express.json());
 app.use(cors());
@@ -19,7 +21,7 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if(text === '/start'){
-    await bot.sendMessage(chatId, '🏠Добро пожаловать в наш уютный виртуальный магазин!\n🍏Тут вы сможете посмотреть все продукты, не выходя из дома\n✔️Задать интересующиеся вопросы в обратной связи\n🚚Также заполнить форму, чтобы оформить вам доставку на дом!')
+    await bot.sendMessage(chatId, '🏠Добро пожаловать в наш уютный виртуальный магазин!\n🍏Тут вы сможете посмотреть все продукты, не выходя из дома\n✔️Задать интересующиеся вопросы можно обратной связи\n🚚Также заполнить форму, чтобы оформить вам доставку на дом!')
     
     await bot.sendMessage(chatId, 'Тут находятся все продукты из нашей базы данных: ', {
         reply_markup: {
@@ -42,56 +44,68 @@ bot.on('message', async (msg) => {
 
   if(text === '/products'){
     await bot.sendMessage(chatId, 'Здесь представлен весь ассортимент продуктов', {
+        
         reply_markup:  {
             inline_keyboard:[
                 [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}},
-                {text: 'Овощная консервация',  web_app:{url: cannedVeg}},]
+                {text: 'Овощная консервация',  web_app:{url: cannedVeg}},
+                {text: 'Сыры',  web_app:{url: drinks}},
+                {text: 'Колбаса / Бастурма / Суджух', web_app:{url: drinks}},
+                {text: 'Замороженные продукты',  web_app:{url: drinks}},
+                {text: 'Мороженое',  web_app:{url: drinks}},
+                {text: 'Чай / Кофе / Конфеты',  web_app:{url: drinks}},
+                {text: 'Сухофрукты',  web_app:{url: drinks}},
+                {text: 'Джемы / Варенья', web_app:{url: drinks}},
+                {text: 'Акксессуары',  web_app:{url: drinks}}]
             ]
-        }
-    })
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Сыры и бастурма', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Сыры',  web_app:{url: drinks}},
-                    {text: 'Колбаса / Бастурма / Суджух', web_app:{url: drinks}},]
-                ]
-            }
-        })
-    }, 2000)
+        },
+        resize_keyboard: true,
+        one_time_keyboard: true,
+        parse_mode: "Markdown",
+    }, )
+    // setTimeout(async () => {
+    //     await bot.sendMessage(chatId, 'Сыры и бастурма', {
+    //         reply_markup:  {
+    //             inline_keyboard:[
+    //                 [{text: 'Сыры',  web_app:{url: drinks}},
+    //                 {text: 'Колбаса / Бастурма / Суджух', web_app:{url: drinks}},]
+    //             ]
+    //         }
+    //     })
+    // }, 2000)
 
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Замороженные продукты и мороженое', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Замороженные продукты',  web_app:{url: drinks}},
-                    {text: 'Мороженое',  web_app:{url: drinks}},]
-                ]
-            }
-        })
-    }, 3000)
+    // setTimeout(async () => {
+    //     await bot.sendMessage(chatId, 'Замороженные продукты и мороженое', {
+    //         reply_markup:  {
+    //             inline_keyboard:[
+    //                 [{text: 'Замороженные продукты',  web_app:{url: drinks}},
+    //                 {text: 'Мороженое',  web_app:{url: drinks}},]
+    //             ]
+    //         }
+    //     })
+    // }, 3000)
    
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Чай / Кофе / Конфеты',  web_app:{url: drinks}},
-                    {text: 'Сухофрукты',  web_app:{url: drinks}}]
-                ]
-            }
-        })
-    }, 4000)
+    // setTimeout(async () => {
+    //     await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
+    //         reply_markup:  {
+    //             inline_keyboard:[
+    //                 [{text: 'Чай / Кофе / Конфеты',  web_app:{url: drinks}},
+    //                 {text: 'Сухофрукты',  web_app:{url: drinks}}]
+    //             ]
+    //         }
+    //     })
+    // }, 4000)
 
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Джемы, варенья и акксессуары', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Джемы / Варенья', web_app:{url: drinks}},
-                    {text: 'Акксессуары',  web_app:{url: drinks}}]
-                ]
-            }
-        })
-    },5000)
+    // setTimeout(async () => {
+    //     await bot.sendMessage(chatId, 'Джемы, варенья и акксессуары', {
+    //         reply_markup:  {
+    //             inline_keyboard:[
+    //                 [{text: 'Джемы / Варенья', web_app:{url: drinks}},
+    //                 {text: 'Акксессуары',  web_app:{url: drinks}}]
+    //             ]
+    //         }
+    //     })
+    // },5000)
     
     setTimeout(async () => {
         await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь. Для этого заполни форму: ', {
