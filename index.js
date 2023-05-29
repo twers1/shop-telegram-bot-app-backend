@@ -8,6 +8,13 @@ const token = process.env.BOT_TOKEN;
 const webAppUrl = 'https://heroic-empanada-97d0d5.netlify.app'
 const drinks = 'https://symphonious-sherbet-5e11cb.netlify.app'
 const cannedVeg = 'https://incredible-souffle-19427e.netlify.app'
+const djems = 'https://flourishing-sawine-f7c560.netlify.app'
+const sausages = 'https://leafy-kringle-76b0bf.netlify.app'
+const cheeses = 'https://jade-lolly-e873f3.netlify.app'
+const frozenFoods = ''
+const teaCofeCandy = ''
+const driedFruits = ''
+
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
 
@@ -53,8 +60,8 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Сыры и бастурма', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Сыры',  web_app:{url: drinks}},
-                    {text: 'Колбаса / Бастурма / Суджух', web_app:{url: drinks}},]
+                    [{text: 'Сыры',  web_app:{url: cheeses}},
+                    {text: 'Колбаса / Бастурма / Суджух', web_app:{url: sausages}},]
                 ]
             }
         })
@@ -63,8 +70,8 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Замороженные продукты и мороженое', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Замороженные продукты',  web_app:{url: drinks}},
-                    {text: 'Мороженое',  web_app:{url: drinks}},]
+                    [{text: 'Замороженные продукты',  web_app:{url: frozenFoods}},
+                    {text: 'Чай / Кофе / Конфеты',  web_app:{url: teaCofeCandy}},]
                 ]
             }
         })
@@ -74,8 +81,8 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Чай / Кофе / Конфеты',  web_app:{url: drinks}},
-                    {text: 'Сухофрукты',  web_app:{url: drinks}}]
+                    [{text: 'Джемы / Варенья', web_app:{url: djems}},
+                    {text: 'Сухофрукты',  web_app:{url: driedFruits}}]
                 ]
             }
         })
@@ -85,8 +92,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Джемы, варенья и акксессуары', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Джемы / Варенья', web_app:{url: drinks}},
-                    {text: 'Акксессуары',  web_app:{url: drinks}}]
+                    [{text: 'Акксессуары',  web_app:{url: drinks}}]
                 ]
             }
         })
