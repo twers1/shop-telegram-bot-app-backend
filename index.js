@@ -11,9 +11,10 @@ const cannedVeg = 'https://incredible-souffle-19427e.netlify.app'
 const djems = 'https://flourishing-sawine-f7c560.netlify.app'
 const sausages = 'https://leafy-kringle-76b0bf.netlify.app'
 const cheeses = 'https://jade-lolly-e873f3.netlify.app'
-const frozenFoods = ''
-const teaCofeCandy = ''
-const driedFruits = ''
+const frozenFoods = 'https://jade-lolly-e873f3.netlify.app'
+const teaCofeCandy = 'https://deft-souffle-2cae09.netlify.app'
+const driedFruits = 'https://jade-lolly-e873f3.netlify.app'
+const groats = 'https://superb-trifle-ee0f53.netlify.app'
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -67,7 +68,7 @@ bot.on('message', async (msg) => {
         })
     }, 2000)
     setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Замороженные продукты и мороженое', {
+        await bot.sendMessage(chatId, 'Замороженные продукты и чай, кофе, конфеты', {
             reply_markup:  {
                 inline_keyboard:[
                     [{text: 'Замороженные продукты',  web_app:{url: frozenFoods}},
@@ -78,7 +79,7 @@ bot.on('message', async (msg) => {
     }, 3000)
    
     setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Кофе, чаи и конфеты', {
+        await bot.sendMessage(chatId, 'Джемы, варенья и сухофрукты', {
             reply_markup:  {
                 inline_keyboard:[
                     [{text: 'Джемы / Варенья', web_app:{url: djems}},
@@ -89,10 +90,11 @@ bot.on('message', async (msg) => {
     }, 4000)
 
     setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Джемы, варенья и акксессуары', {
+        await bot.sendMessage(chatId, 'Крупы и акксессуары', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Акксессуары',  web_app:{url: drinks}}]
+                    [{text: 'Крупы', web_app:{url: groats}},
+                    {text: 'Акксессуары',  web_app:{url: drinks}}]
                 ]
             }
         })
