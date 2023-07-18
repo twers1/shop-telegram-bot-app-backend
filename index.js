@@ -40,6 +40,12 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Для ознакомления всех команд, которые есть в боте - /commands', {
         })
     },1000)
+    setTimeout(async () => {
+        const me = '<a href="https://github.com/twers1">разработчику</a>'
+        const message = `Бот в тестовом режиме. Если у вас будут вопросы пожалуйста обратитесь к ${me}`
+        await bot.sendMessage(chatId, message,{parse_mode: 'HTML'}, {
+        })
+    },3000)
     
   }
 
@@ -61,7 +67,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Сыры и бастурма', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Сыры',  web_app:{url: cheeses}},
+                    [{text: 'Сыры / Молочные продукты',  web_app:{url: cheeses}},
                     {text: 'Колбаса / Бастурма / Суджух', web_app:{url: sausages}},]
                 ]
             }
@@ -71,7 +77,7 @@ bot.on('message', async (msg) => {
         await bot.sendMessage(chatId, 'Замороженные продукты и чай, кофе, конфеты', {
             reply_markup:  {
                 inline_keyboard:[
-                    [{text: 'Замороженные продукты',  web_app:{url: frozenFoods}},
+                    [{text: 'Замороженные продукты / Мороженое',  web_app:{url: frozenFoods}},
                     {text: 'Чай / Кофе / Конфеты',  web_app:{url: teaCofeCandy}},]
                 ]
             }
@@ -111,11 +117,16 @@ bot.on('message', async (msg) => {
 }
 
   if(text === "/commands"){
-    await bot.sendMessage(chatId, 'Команды: \n /start - запустить бота\n /info - получить информацию об обратной связи\n /products - получить все продукты\n /socials - наши контакты')
+    await bot.sendMessage(chatId, 'Команды: \n/start - запустить бота\n/info - получить информацию об обратной связи\n/products - получить все продукты\n/socials - наши контакты')
   }
 
   if(text ==="/socials"){
-    await bot.sendMessage(chatId, '🌐Наши социальные сети:\n Вконтакте: https://vk.com/armenianhomenn \n Инстаграм: https://instagram.com/armenianhome?igshid=NTc4MTIwNjQ2YQ== \n 🗺️Мы в картах: \n Яндекс: https://yandex.ru/maps/org/armyanskiy_dom/98158241338/?ll=43.865124%2C56.345758&z=13 \n Гугл: https://www.google.com/maps/place/Армянский+Дом/@56.3458083,43.8653642,15z/data=!4m6!3m5!1s0x4151d7b1379f5eab:0x5bbe873a011b4cb7!8m2!3d56.3458083!4d43.8653642!16s%2Fg%2F11s7vn1tyn?hl=ru')
+    const vkontakteLink = '<a href="https://vk.com/armenianhomenn">Вконтакте</a>';
+    const instagramLink = '<a href="https://instagram.com/armenianhome?igshid=NTc4MTIwNjQ2YQ==">Инстаграм</a>'
+    const yandexLink = '<a href="https://yandex.ru/maps/org/armyanskiy_dom/98158241338/?ll=43.865124%2C56.345758&z=13">Яндекс</a>'
+    const googleLink = '<a href="https://www.google.com/maps/place/Армянский+Дом/@56.3458083,43.8653642,15z/data=!4m6!3m5!1s0x4151d7b1379f5eab:0x5bbe873a011b4cb7!8m2!3d56.3458083!4d43.8653642!16s%2Fg%2F11s7vn1tyn?hl=ru">Гугл</a>'
+    const message = `🌐Наши социальные сети:\n${vkontakteLink} \n${instagramLink} \n🗺️Мы в картах: \n${yandexLink} \n${googleLink}`;
+    await bot.sendMessage(chatId, message, {parse_mode: 'HTML'})
   }
   
   if(msg?.web_app_data?.data) {
