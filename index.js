@@ -27,100 +27,55 @@ bot.on('message', async (msg) => {
   const text = msg.text;
 
   if(text === '/start'){
-    await bot.sendMessage(chatId, '🏠Добро пожаловать в наш уютный виртуальный магазин!\n🍏Тут вы сможете посмотреть все продукты, не выходя из дома\n✔️Задать интересующиеся вопросы можно обратной связи\n🚚Также заполнить форму, чтобы оформить вам доставку на дом!')
-    
-    await bot.sendMessage(chatId, 'Тут находятся все продукты из нашей базы данных: ', {
+    await bot.sendMessage(chatId, '🏠Добро пожаловать в наш уютный виртуальный магазин!\n🍏Тут вы сможете посмотреть все продукты, не выходя из дома\n✔️Задать интересующиеся вопросы можно обратной связи\n🚚Также заполнить форму, чтобы оформить вам доставку на дом!', {
         reply_markup: {
-            inline_keyboard:[
-                [{text: 'Посмотреть ', web_app:{url: webAppUrl}}]
-            ]
+            keyboard: [
+                [{ text: 'Продукты' }],
+                [{ text: 'Социальные сети' }],
+                [{ text: 'Обратная связь' }],
+                [{text: 'Контакты разработчика'}]
+            ],
+            resize_keyboard: true, 
+            one_time_keyboard: true 
         }
-    })
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Для ознакомления всех команд, которые есть в боте - /commands', {
-        })
-    },1000)
-    setTimeout(async () => {
-        const me = '<a href="https://github.com/twers1">разработчику</a>'
-        const message = `Бот в тестовом режиме. Если у вас будут вопросы пожалуйста обратитесь к ${me}`
-        await bot.sendMessage(chatId, message,{parse_mode: 'HTML'}, {
-        })
-    },3000)
-    
+    });
   }
 
-  if(text === '/info'){
-    await bot.sendMessage(chatId, 'Если у вас остались вопросы, то вам сюда -> @feedbackArmenianHomeBot', {
+  if(text === 'Обратная связь'){
+    await bot.sendMessage(chatId, 'Для обратной связи заполните форму или же перейдите на этого бота -> @feedbackArmenianHomeBot', {
     })
   }
 
-  if(text === '/products'){
-    await bot.sendMessage(chatId, 'Здесь представлен весь ассортимент продуктов', {
-        reply_markup:  {
-            inline_keyboard:[
-                [{text: 'Напитки / Компоты / Вода', web_app:{url: drinks}},
-                {text: 'Овощная консервация',  web_app:{url: cannedVeg}},]
-            ]
-        }
-    })
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Сыры и бастурма', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Сыры / Молочные продукты',  web_app:{url: cheeses}},
-                    {text: 'Колбаса / Бастурма / Суджух', web_app:{url: sausages}},]
-                ]
-            }
-        })
-    }, 2000)
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Замороженные продукты и чай, кофе, конфеты', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Замороженные продукты / Мороженое',  web_app:{url: frozenFoods}},
-                    {text: 'Чай / Кофе / Конфеты',  web_app:{url: teaCofeCandy}},]
-                ]
-            }
-        })
-    }, 3000)
-   
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Джемы, варенья и сухофрукты', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Джемы / Варенья', web_app:{url: djems}},
-                    {text: 'Сухофрукты',  web_app:{url: driedFruits}}]
-                ]
-            }
-        })
-    }, 4000)
-
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Крупы и акксессуары', {
-            reply_markup:  {
-                inline_keyboard:[
-                    [{text: 'Крупы', web_app:{url: groats}},
-                    {text: 'Акксессуары',  web_app:{url: drinks}}]
-                ]
-            }
-        })
-    }, 5000)
-    setTimeout(async () => {
-        await bot.sendMessage(chatId, 'Не забывайте, что можете сделать заказ прямо здесь. Для этого заполни форму: ', {
-            reply_markup: {
-                keyboard:[
-                    [{text: 'Заполнить форму ', web_app: {url: webAppUrl + '/form'}}]
-                ]
-            }
-        })
-    }, 7000)
+if (text === 'Продукты') {
+    await bot.sendMessage(chatId, 'Выберите категорию продуктов', {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    { text: 'Напитки / Компоты / Вода', web_app: { url: drinks } },
+                    { text: 'Овощная консервация', web_app: { url: cannedVeg } },
+                ],
+                [
+                    {text: 'Сыры / Молочные продукты',  web_app:{url: cheeses}},
+                    {text: 'Колбаса / Бастурма / Суджух', web_app:{url: sausages}}
+                ],
+                [
+                    { text: 'Замороженные продукты / Мороженое', web_app: { url: frozenFoods } },
+                    { text: 'Чай / Кофе / Конфеты', web_app: { url: teaCofeCandy } },
+                ],
+                [
+                    { text: 'Джемы / Варенья', web_app: { url: djems } },
+                    { text: 'Сухофрукты', web_app: { url: driedFruits } },
+                ],
+                [
+                    { text: 'Крупы', web_app: { url: groats } },
+                    { text: 'Аксессуары', web_app: { url: drinks } },
+                ],
+            ],
+        },
+    });
 }
 
-  if(text === "/commands"){
-    await bot.sendMessage(chatId, 'Команды: \n/start - запустить бота\n/info - получить информацию об обратной связи\n/products - получить все продукты\n/socials - наши контакты')
-  }
-
-  if(text ==="/socials"){
+  if(text ==="Социальные сети"){
     const vkontakteLink = '<a href="https://vk.com/armenianhomenn">Вконтакте</a>';
     const instagramLink = '<a href="https://instagram.com/armenianhome?igshid=NTc4MTIwNjQ2YQ==">Инстаграм</a>'
     const yandexLink = '<a href="https://yandex.ru/maps/org/armyanskiy_dom/98158241338/?ll=43.865124%2C56.345758&z=13">Яндекс</a>'
@@ -128,6 +83,11 @@ bot.on('message', async (msg) => {
     const message = `🌐Наши социальные сети:\n${vkontakteLink} \n${instagramLink} \n🗺️Мы в картах: \n${yandexLink} \n${googleLink}`;
     await bot.sendMessage(chatId, message, {parse_mode: 'HTML'})
   }
+  if(text == "Контакты разработчика"){
+    const me = '<a href="https://github.com/twers1">разработчику</a>'
+    const message = `Бот в тестовом режиме.\nЕсли у вас будут вопросы пожалуйста обратитесь к ${me}`
+    await bot.sendMessage(chatId, message,{parse_mode: 'HTML'})
+}
   
   if(msg?.web_app_data?.data) {
     try {
