@@ -15,6 +15,7 @@ const frozenFoods = 'https://jade-lolly-e873f3.netlify.app'
 const teaCofeCandy = 'https://deft-souffle-2cae09.netlify.app'
 const driedFruits = 'https://jade-lolly-e873f3.netlify.app'
 const groats = 'https://superb-trifle-ee0f53.netlify.app'
+const accessories = 'https://jade-lolly-e873f3.netlify.app'
 
 const bot = new TelegramBot(token, {polling: true});
 const app = express();
@@ -68,7 +69,7 @@ if (text === 'Продукты') {
                 ],
                 [
                     { text: 'Крупы', web_app: { url: groats } },
-                    { text: 'Аксессуары', web_app: { url: drinks } },
+                    { text: 'Аксессуары', web_app: { url: accessories } },
                 ],
             ],
         },
